@@ -1,17 +1,11 @@
 function solution(array) {
-    let count = array.reduce((acc, cur) => {
-        acc[cur] = (acc[cur] || 0) + 1;
-        return acc;
-    }, {});
-    
-    const keys = Object.keys(count);
-    let values = Object.values(count);
-    let max = Math.max(...values);
-    let answer = [];
-    keys.forEach((v) => {
-        if(count[v] === max) answer.push(parseInt(v));
-    })
-    
-    return answer.length === 1 ? answer[0] : -1;
+    let map = new Map();
+    array.forEach((v) => {
+        map.set(v,(map.get(v) || 0 ) + 1);
+    });
+    const answer = [...map.entries()].sort((a,b) => b[1] - a[1]);
+    if(answer.length === 1) return answer[0][0]
+    if(answer[0][1] === answer[1][1]) return -1;
+    return answer[0][0];
     
 }
