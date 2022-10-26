@@ -1,17 +1,17 @@
 function solution(numbers, target) {
     let answer = 0;
-    const bfs = (index, sum) => {
+    const dfs = (index, sum) => {
         if(index === numbers.length) {
             if(sum === target) answer += 1;
             return 0;
         }
         
         
-        bfs(index+1, sum + numbers[index]);
-        bfs(index+1, sum - numbers[index]);
+        dfs(index+1, sum + numbers[index]);
+        dfs(index+1, sum - numbers[index]);
     }
     
-    bfs(0,0);
+    dfs(0,0);
     
     return answer;
 }
