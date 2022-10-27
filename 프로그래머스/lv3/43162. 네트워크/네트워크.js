@@ -1,29 +1,27 @@
 function solution(n, computers) {
     let answer = 0;
-    const visited = new Array(n).fill(false);
+    let visited = Array(n).fill(false);
     
-    for(let i =0; i<n; i+=1) {
-        if(!visited[i]) {
-            dfs(n,computers,visited, i);
-            answer += 1;
-        } 
+    for(let i = 0; i < n; i+= 1){
+        answer += dfs(computers, visited,i);
     }
     
     return answer;
 }
 
-function dfs(n, computers, visited, start) {
-    const stack = [start];
+function dfs(computers, visited, index){
+    if(visited[index] === true) return 0;
     
-    while(stack.length > 0) {
-        const curr = stack.pop();
-        
-        visited[curr] = true;
-        
-        for(let i = 0;i < n; i+= 1){
-            if(!visited[i] && computers[curr][i]) {
-                stack.push(i);
-            }
-        } 
+    visited[index] = true;
+    
+    for(let j = 0; j < computers.length; j+= 1) {
+        if(index !== j && computers[index][j] === 1 ) {
+            dfs(computers, visited, j);
+        }
     }
+    
+    return 1;
 }
+
+// computers[0] 을 보고 1인 것들 연결을 한다. 
+// for문을 도는 중에 인덱스를 바꾸고 싶거나, 말이 안된다 싶으면 재귀함수 쓰기
