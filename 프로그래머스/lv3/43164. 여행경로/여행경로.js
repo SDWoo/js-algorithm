@@ -1,3 +1,6 @@
+// 방법론이 두가지가 있다. 
+// tickets의 경우의 수를 다 저장해놨다가 배열.toString sort로 0번째 리턴
+// 그냥 그래프 
 function solution(tickets) {
     const graph = {};
     for (const [src,dest] of tickets) {
