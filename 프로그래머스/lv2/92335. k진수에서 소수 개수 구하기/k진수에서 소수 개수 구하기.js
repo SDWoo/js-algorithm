@@ -1,25 +1,52 @@
-function isPrime(number) {
-  if (number <= 1) {
-    return false;
-  }
-  for (let i = 2; i <= Math.sqrt(number); i++) {
-    if (number % i === 0) {
-      return false;
+function isPrime(num) {
+    if(num === 1 || num === 0) {
+        return false;
     }
-  }
-  return true;
+    
+    if(num === 2) {
+        return true;
+    }
+    
+    for(let i = 2; i<= Math.floor(Math.sqrt(num)); i+= 1) {
+        if(num % i === 0){
+            return false
+        }
+    }
+    
+    return true;
 }
 
 function solution(n, k) {
-  let answer = 0;
-  let num = n.toString(k); // n을 k진수로 변환
-  let numArr = num.split("0"); // 변환한 숫자를 0을 기준으로 나눠 배열에 저장
-
-  for (let i = 0; i < numArr.length; i++) {
-    if (isPrime(Number(numArr[i]))) {
-      answer++; // 해당 숫자가 소수면 answer++
+    let result = 0;
+    // 일단 진수 변환 => 순차적으로 돈다. 근데, 0이 나오는 경우에 판단한다. 
+    const answer = [];
+    const stack = [];
+    while(n > 0) {
+        stack.push(n % k);
+        n = Math.floor(n / k);
     }
-  }
-
-  return answer;
+    
+    let number = '';
+    while(stack.length>0) {
+        let digit = stack.pop();
+        if(number && digit === 0) {
+            answer.push(number);
+            number = '';
+        }else {
+            number += digit;
+        }
+        
+        if(number && stack.length === 0) answer.push(number);
+    }
+    
+    
+    if(answer.length === 1) {
+        return isPrime(+answer[0]) ? 1 : 0
+    }
+    
+    for(let i = 0; i<answer.length ; i+= 1) {
+        if(isPrime(+answer[i])) result += 1;
+    }
+   
+   return result; 
 }
