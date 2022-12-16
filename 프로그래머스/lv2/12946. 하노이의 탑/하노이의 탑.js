@@ -1,13 +1,16 @@
-function solution_(n, from, through, to) {
-    if(n == 1)
-        return [[from,to]];
-    let result = [];
-    result = result.concat(solution_(n - 1, from, to, through));
-    result.push([from, to]);
-    result = result.concat(solution_(n - 1, through, from, to));
-    return result;
+const answer = [];
+
+const hanoi = (n, src, dst, mid) => {
+    if (n === 1) answer.push([src, dst]);
+    else {
+        hanoi(n - 1, src, mid, dst);
+        answer.push([src, dst]);
+        hanoi(n - 1, mid, dst, src);
+    }
 }
 
 function solution(n) {
-    return solution_(n,1,2,3);
+    hanoi(n, 1, 3, 2);
+    
+    return answer;
 }
