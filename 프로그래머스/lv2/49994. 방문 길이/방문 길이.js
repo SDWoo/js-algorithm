@@ -1,30 +1,29 @@
 function solution(dirs) {
     let answer = 0;
-    const MIN = -5;
-    const MAX = 5;
-    let currX = 0; 
-    let currY = 0;
-    const set = new Set();
+    let up = 0;
+    let down = 0;
+    let left = 0;
+    let right = 0;
     
     dirs.split('').forEach((dir) => {
-        let path = '' + currX + currY;
-        if(dir === 'U' && currY + 1 <= MAX) {
-            currY++;
-        }
-        else if(dir === 'D' && currY - 1 >= MIN ){
-            currY--
-        }
-        else if(dir === 'L' && currX - 1 >= MIN){
-            currX--
-        }
-        else if(dir ==='R' && currX + 1 <= MAX){
-            currX++
-        }else {
-            return false;
-        }
-        let newPath = '' + currX + currY;
-        set.add(currX + (currY + path)); 
-        set.add(path + currX + currY);
+            if(dir === 'U') {
+                if(down > 0) down -= 1
+                else up += 1;
+            }
+            else if(dir === 'D'){
+                if(up > 0) up -= 1
+                else down += 1;
+            }
+            else if(dir === 'L'){
+                if(right > 0) right -= 1
+                else left += 1;
+            }
+            else if(dir ==='R'){
+                if(left > 0) left -= 1
+                else right += 1;
+            }
+        console.log(left, right, up, down)
     })
-    return Math.floor(set.size / 2);
+    
+    return up + down + left + right;
 }
