@@ -1,13 +1,13 @@
 function solution(participant, completion) {
-    let answer = '';
+    let result = '';
     participant.sort();
     completion.sort();
     
     participant.forEach((name, index) => {
-        if(answer.length > 0) return;
-        if(name !== completion[index]) answer = name;
+        if(result.length > 0) return;
+        if(name !== completion[index]) result = name;
     })
     
-    return answer;
+    return result;
 
 }
