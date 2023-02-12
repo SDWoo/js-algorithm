@@ -3,14 +3,9 @@ function solution(a, b, n) {
     
     while(n >= a) {
         quot = Math.floor(n/a);
-        remain = n % a;
-        
-        const returnCoke= quot * b;
-        n = returnCoke + remain;
-        
-        answer += returnCoke;
-        
-     }
+        n = quot * b + n % a;
+        answer += quot * b;
+    }
     
     return answer;
 }
