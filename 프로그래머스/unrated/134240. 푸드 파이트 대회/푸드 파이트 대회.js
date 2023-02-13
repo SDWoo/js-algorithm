@@ -1,11 +1,11 @@
 function solution(food) {
     let answer = ''
-    for(let i = 1;i<food.length ; i++) {
-        let j = Math.floor(food[i]/2);
-        while(j > 0) {
-            answer += i;
-            j--;
+    food.splice(1,food.length).forEach((value, index) => {
+        for(let i = 0; i <Math.floor(value/2); i+= 1) {
+            answer += index+1;
         }
-    }
-    return answer + '0' + answer.split('').reverse().join('');    
+        
+    })
+            
+    return answer + '0' + answer.split('').reverse().join('');
 }
