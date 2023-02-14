@@ -8,11 +8,10 @@ function solution(k, tangerine) {
     });
     
     const Counter = [...tangerineMap.values()].sort((a,b) => b-a);
-    // 역순으로 정렬 -> 값이 k보다 크다? 하나로 다 넣기 : 다 넣고 다음 밸류 보기.
     for(number of Counter) {
+        if(k <= 0) break;
         k -= number;
         answer += 1;
-        if(k <= 0) break;
     }   
     return answer;
 }
