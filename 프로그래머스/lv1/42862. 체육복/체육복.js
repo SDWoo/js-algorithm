@@ -13,45 +13,23 @@ function solution (n, lost, reserve) {
             reserve = indexFilter(reserve, i);
             lost = indexFilter(lost, i);
     }})
-    let answer = n - lost.length;
     
-    let a = answer;
     for(let i = 1; i <= n ; i +=1) {
         if(!lost.includes(i)) continue;        
         
         if(reserve.includes(i-1)) {
             reserve = indexFilter(reserve, i-1);
             lost = indexFilter(lost, i);
-            a++;
             continue;
         }
         
         if(reserve.includes(i+1)) {
             reserve = indexFilter(reserve, i+1);
             lost = indexFilter(lost, i);
-            a++;
         }
     }
     
-    let b = answer;
-    for(let i = n-1; i >= 0 ; i -= 1) {
-        if(!lost.includes(i)) continue;        
-        
-        if(reserve.includes(i-1)) {
-            reserve = indexFilter(reserve, i-1);
-            lost = indexFilter(lost, i);
-            b++;
-            continue;
-        }
-        
-        if(reserve.includes(i+1)) {
-            reserve = indexFilter(reserve, i+1);
-            lost = indexFilter(lost, i);
-            b++
-        }
-    }
-    
-    return Math.max(a,b);
+    return n - lost.length
 }
     
     
