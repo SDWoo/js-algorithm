@@ -1,12 +1,15 @@
 function solution(number, k) {
-  let answerStack = [0];
-  let deleteCount = -1;
-  for (let index = 0; index < number.length; index++) {
-    while (deleteCount < k && number[index] > answerStack[answerStack.length - 1]) {
-      answerStack.pop();
-      deleteCount++;
+    let deleteCount = -1;
+    let answer = [0];
+    for (let i = 0; i < number.length; i++) {
+        while(deleteCount < k && number[i] > answer[answer.length-1]) {
+            answer.pop();
+            deleteCount += 1;
+        }
+        
+        if(answer.length < number.length - k) {
+            answer.push(number[i]);
+        }
     }
-    if (answerStack.length < number.length - k) answerStack.push(number[index]);
-  }
-  return answerStack.join('');
+    return answer.join('');
 }
