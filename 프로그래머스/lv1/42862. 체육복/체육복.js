@@ -1,32 +1,30 @@
 function solution (n, lost, reserve) {
-    const filterTarget = (array, target) => {
-        return array.filter((value) => !(value === target))    
-    }
+    let filteredLost = lost.filter((v) => !reserve.includes(v)).sort((a,b) => a-b);
+    const filteredReserve = reserve.filter((v) => !lost.includes(v)).sort((a,b) => a-b);
     
-    const borrowClothes = (reserveTarget, lostTarget) => {
-        reserve = filterTarget(reserve,reserveTarget);
-        lost = filterTarget(lost, lostTarget);
-    }
-    
-    lost.forEach((i) => {
-        if(lost.includes(i) && reserve.includes(i)) {
-            borrowClothes(i, i);
-    }})
-    
-    for(let i = 1; i <= n ; i +=1) {
-        if(!lost.includes(i)) continue;        
-        
-        if(reserve.includes(i-1)) {
-            borrowClothes(i-1, i);
-            continue;
+    filteredReserve.forEach((v) => {
+        const borrow = filteredLost.find((w)=> Math.abs(w-v) === 1);
+        if(borrow) {
+            filteredLost = filteredLost.filter((v) => v !== borrow);
         }
-        
-        if(reserve.includes(i+1)) {
-            borrowClothes(i+1, i)
-        }
-    }
+    })
     
-    return n - lost.length
+    return n - filteredLost.length;
+    
+//     for(let i = 1; i <= n ; i +=1) {
+//         if(!lost.includes(i)) continue;        
+        
+//         if(reserve.includes(i-1)) {
+//             borrowClothes(i-1, i);
+//             continue;
+//         }
+        
+//         if(reserve.includes(i+1)) {
+//             borrowClothes(i+1, i)
+//         }
+//     }
+    
+//     return n - lost.length
 }
     
     
