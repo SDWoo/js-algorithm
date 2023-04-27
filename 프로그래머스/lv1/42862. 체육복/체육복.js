@@ -3,24 +3,26 @@ function solution (n, lost, reserve) {
         return array.filter((value) => !(value === target))    
     }
     
+    const borrowClothes = (reserveTarget, lostTarget) => {
+        reserve = filterTarget(reserve,reserveTarget);
+        lost = filterTarget(lost, lostTarget);
+    }
+    
     lost.forEach((i) => {
         if(lost.includes(i) && reserve.includes(i)) {
-            reserve = filterTarget(reserve, i);
-            lost = filterTarget(lost, i);
+            borrowClothes(i, i);
     }})
     
     for(let i = 1; i <= n ; i +=1) {
         if(!lost.includes(i)) continue;        
         
         if(reserve.includes(i-1)) {
-            reserve = filterTarget(reserve, i-1);
-            lost = filterTarget(lost, i);
+            borrowClothes(i-1, i);
             continue;
         }
         
         if(reserve.includes(i+1)) {
-            reserve = filterTarget(reserve, i+1);
-            lost = filterTarget(lost, i);
+            borrowClothes(i+1, i)
         }
     }
     
