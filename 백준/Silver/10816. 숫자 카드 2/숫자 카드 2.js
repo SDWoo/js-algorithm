@@ -18,7 +18,7 @@ const getLowestIndex = (target, start, end) => {
       end = mid;
     } else start = mid + 1;
   }
-  return end;
+  return start;
 };
 
 const getHighestIndex = (target, start, end) => {
@@ -28,13 +28,13 @@ const getHighestIndex = (target, start, end) => {
       end = mid;
     } else start = mid + 1;
   }
-  return end;
+  return start;
 };
 
 for(let i = 0; i < M; i +=1) {
     let high = getHighestIndex(B[i], 0, N);
     let low = getLowestIndex(B[i], 0, N)
-  answer.push( high-low );
+  answer.push(high-low);
 }
 
 console.log(answer.join(' '));
